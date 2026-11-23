@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://gentadeck.github.io/gentadeck-assets/sitemap.xml
