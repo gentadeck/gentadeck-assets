@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GentaDeck – PowerPoint Template Store Layout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#F2F5F9; --line:#E1E7EF; --edge:#8294AC; --sk:#CBD5E3; --ink:#0B192C; --on-ink:#FFFFFF; --muted:#52627A; --focus:#2459B3; --focus-fg:#FFFFFF;
+  --fs-0:1.0625rem; --fs-1:1.3rem; --fs-2:1.625rem; --fs-3:clamp(2rem,4vw,3.05rem);
+  --gap:clamp(1rem,2.4vw,2rem); --r:14px; --tap:max(44px,2.75rem); --maxw:75rem;
+  --ease:cubic-bezier(.22,1,.36,1); --dur:.4s; --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --panel:#0B192C; --panel-fg:#FFFFFF; --yellow:#F2B84B; --sp-1:.25rem; --sp-2:.5rem; --sp-3:.75rem; --sp-4:1rem; --sp-5:1.5rem; --sp-6:2rem; --sp-7:3rem; --sp-8:4rem; --sp-9:5rem; --pad:1rem; --card-pad:1.25rem; --r-lg:24px;
+  box-sizing:border-box; padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px); -webkit-text-size-adjust:100%; text-size-adjust:100%;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B192C;--surface:#12263F;--line:#22395A;--edge:#7E93B0;--sk:#2C4768;--ink:#FFFFFF;--on-ink:#0B192C;--muted:#A9B8CE;--focus:#8DB8FF;--focus-fg:#0B192C;--panel:#1B365A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B192C;--surface:#12263F;--line:#22395A;--edge:#7E93B0;--sk:#2C4768;--ink:#FFFFFF;--on-ink:#0B192C;--muted:#A9B8CE;--focus:#8DB8FF;--focus-fg:#0B192C;--panel:#1B365A;color-scheme:dark}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media(min-width:1700px){html{font-size:112.5%}}
+@media(min-width:2200px){html{font-size:137.5%}}
+*,*::before,*::after{box-sizing:inherit}
+@media(min-width:600px){:root{--pad:1.5rem;--card-pad:1.5rem}}
+@media(min-width:1024px){:root{--pad:2rem}}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:400 var(--fs-0)/1.65 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.wrap{width:min(var(--maxw),100% - 2*var(--pad));margin-inline:auto}
+button{font:inherit;color:inherit;cursor:pointer}
+
+/* placeholders */
+.stack{display:grid;gap:.8rem}
+.shot{aspect-ratio:16/9;border-radius:20px;background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--sk) 55%,var(--surface)));display:grid;place-items:center;color:var(--edge)}
+.shot svg{width:22%;opacity:.6}
+
+/* buttons: soft colour fade, no wipe, no scale */
+.btn{min-height:3rem;min-width:8rem;padding:.65rem 1.6rem;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--on-ink);font-weight:600;letter-spacing:.005em;transition:background-color var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease),opacity var(--dur) var(--ease)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:focus-visible{background:var(--focus);border-color:var(--focus);color:var(--focus-fg)}
+@media(hover:hover){.btn:not(:disabled):hover{background:var(--focus);border-color:var(--focus);color:var(--focus-fg)}}
+.btn:not(:disabled):active{opacity:.85}
+.btn.sm{min-height:var(--tap);min-width:var(--tap);padding:.5rem 1.2rem}
+
+/* header */
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+header .wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--gap);padding-block:.6rem}
+.logo{width:clamp(3.5rem,6vw,4.5rem);height:auto;display:block}
+.nav{display:flex;justify-content:flex-end;gap:.5rem}
+.nav a,.nav button{min-height:var(--tap);display:inline-flex;align-items:center;padding:0 1rem;border-radius:999px;border:1px solid transparent;background:none;text-decoration:none;color:inherit}
+.nav a[aria-current="page"]{border-color:var(--line);background:var(--surface)}
+@media(max-width:720px){header .btn{display:none}header .wrap{grid-template-columns:auto 1fr}.nav{overflow-x:auto;scrollbar-width:none;gap:0}.nav .hide-m{display:none}.wordmark{font-size:1.15rem}}
+
+/* HERO: text + CTA + chips on the left, preview on the right */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-template-rows:auto auto auto;align-content:center;align-items:center;column-gap:clamp(2rem,5vw,4.5rem);row-gap:var(--sp-5);min-height:min(70vh,38rem);min-height:min(70svh,38rem);padding-block:var(--sp-7) var(--sp-8);position:relative}
+.z{position:relative}
+.z-po{grid-column:1;grid-row:1;align-self:end}
+.z-t{grid-column:1;grid-row:2;justify-self:start;display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+.z-wf{grid-column:1;grid-row:3;align-self:start;display:flex;gap:.5rem;flex-wrap:wrap}
+.z-sf{grid-column:2;grid-row:1/4;align-self:center}
+.z-sf .shot{aspect-ratio:4/3;border-radius:24px}
+.hero .btn{min-width:min(12rem,100%);min-height:3.25rem;font-size:1.0625rem}
+@media(max-width:1023px){
+  .hero{grid-template-columns:1fr;grid-template-rows:auto;min-height:0;padding-block:var(--sp-5) var(--sp-7)}
+  .hero>.z{grid-column:1;grid-row:auto}
+  .z-po{order:1;align-self:auto}.z-sf{order:2}.z-t{order:3}.z-wf{order:4;align-self:auto}
+}
+@media(max-width:599px){.z-t{justify-self:stretch}.z-t .btn{flex:1}}
+@media(max-height:520px){.hero{min-height:0}}
+
+/* one calm motion: soft fade + small vertical rise */
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.hero .z{animation:rise .55s var(--ease) both}
+.z-t{animation-delay:.06s!important}.z-wf{animation-delay:.12s!important}.z-sf{animation-delay:.08s!important}
+
+/* SECTION HEAD */
+.sec{padding-block:var(--sp-7)}
+@media(min-width:600px){.sec{padding-block:var(--sp-8)}}
+@media(min-width:1024px){.sec{padding-block:var(--sp-9)}}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem var(--gap);margin-bottom:1.25rem}
+.sec-head .stack{flex:1 1 18rem;gap:.4rem}
+.ctrl{display:flex;align-items:center;gap:.6rem}
+.count{min-width:3.4rem;text-align:center;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.arrow{width:3rem;height:3rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);display:grid;place-items:center;transition:background-color var(--dur) var(--ease),opacity var(--dur) var(--ease)}
+.arrow:hover:not(:disabled){background:var(--surface)}
+.arrow:disabled{opacity:.3;cursor:default}
+.arrow svg{width:20px;height:20px}
+
+/* CAROUSEL */
+.rail{display:flex;gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:.25rem .6rem 1rem;margin-inline:-.6rem;scrollbar-width:none;overscroll-behavior-x:contain}
+.rail::-webkit-scrollbar{display:none}
+@media(hover:hover){.rail{cursor:grab;user-select:none}}
+.card{position:relative;flex:0 0 clamp(17.5rem,86%,32.5rem);scroll-snap-align:start;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:var(--sp-4);padding:var(--card-pad);border-radius:var(--r-lg);background:var(--surface);border:1px solid transparent;transition:border-color var(--dur) var(--ease)}
+.card.on{border-color:var(--line)}
+.card .shot{grid-column:1/-1;background:var(--bg)}
+.card .meta{align-self:end}
+.card .buy{align-self:end;justify-self:end;display:flex;align-items:center;gap:1rem}
+.dots{display:flex;gap:.5rem;justify-content:center;margin-top:.4rem}
+.dots i{width:20px;height:4px;border-radius:4px;background:var(--sk);transition:background-color var(--dur) var(--ease),width var(--dur) var(--ease)}
+.dots i.on{background:var(--ink);width:36px}
+@media(min-width:600px) and (max-width:1023px){.card{flex-basis:calc((100% - var(--gap))/2.15)}}
+
+/* POLICY */
+#policy{border-top:1px solid var(--line)}
+.pol-head{display:grid;gap:var(--sp-3);margin-bottom:var(--sp-6)}
+.lead{margin:0;max-width:52ch;color:var(--muted)}
+.pol-grid{display:grid;grid-template-columns:minmax(10rem,13rem) minmax(0,1fr);gap:var(--sp-5) clamp(1.5rem,5vw,4rem);align-items:start}
+.tabs{display:flex;flex-direction:column;gap:.25rem;position:sticky;top:1rem}
+.tab{min-height:var(--tap);padding:0 1rem;border:0;border-radius:12px;background:none;color:var(--muted);display:flex;align-items:center;text-align:left;font-weight:600;font-size:.9375rem;transition:background-color var(--dur) var(--ease),color var(--dur) var(--ease)}
+@media(hover:hover){.tab:hover{background:color-mix(in srgb,var(--surface) 70%,transparent);color:var(--ink)}}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.body{display:grid;max-width:62ch;animation:rise var(--dur) var(--ease)}
+.pitem{display:grid;gap:.5rem;padding-block:1.5rem;border-top:1px solid var(--line)}
+.pitem:first-child{border-top:0;padding-top:0}
+.callout{margin-top:var(--sp-2);padding:var(--sp-4) var(--card-pad);border-radius:var(--r);background:var(--surface);color:var(--muted)}
+.callout strong{color:var(--ink);font-weight:600}
+.contact{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 1.5rem;margin-top:var(--sp-6);padding:var(--card-pad);border-radius:var(--r-lg);background:var(--surface)}
+@media(max-width:599px){
+  .pol-grid{grid-template-columns:1fr}
+  .tabs{position:static;flex-direction:row;flex-wrap:wrap}
+  .contact{flex-direction:column;align-items:stretch}
+}
+
+footer{border-top:1px solid var(--line);margin-top:2rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem var(--gap);padding-block:var(--sp-6)}
+footer .logo{width:48px}
+.flinks{display:flex;flex-wrap:wrap;gap:.25rem 1rem}
+.flinks a{min-height:var(--tap);display:inline-flex;align-items:center;padding:0 .4rem;color:var(--muted);font-weight:600;font-size:.9375rem;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:.25em;transition:color var(--dur) var(--ease)}
+.flinks a:hover{color:var(--ink)}
+#templates,#included,#how,#before-you-buy,#policy{scroll-margin-top:4.5rem}
+.trust{list-style:none;margin:0;padding:0;display:grid;gap:.2rem}
+.trust a,.trust div{display:flex;align-items:center;gap:.7rem;min-height:var(--tap);color:inherit;text-decoration:none;font-weight:600;font-size:.9375rem}
+.trust a:hover b{text-decoration:underline;text-underline-offset:.2em}
+.trust svg{width:1.4rem;height:1.4rem;flex:none;color:var(--muted)}
+.trust b{font-weight:600}
+
+/* mobile thumb zone */
+.dock{display:none}
+@media(max-width:720px){
+  .dock{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;justify-content:flex-end;padding:.7rem max(var(--gap),env(safe-area-inset-right,0px)) calc(.7rem + env(safe-area-inset-bottom,0px)) max(var(--gap),env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  body{padding-bottom:5.5rem}
+  .dock .btn{min-width:min(14rem,100%)}
+  footer .btn{display:none}
+}
+
+/* Gutenberg zone overlay (design review) */
+body.zones .hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:
+  linear-gradient(var(--focus),var(--focus)) center/2px 100% no-repeat,
+  linear-gradient(var(--focus),var(--focus)) center/100% 2px no-repeat,
+  linear-gradient(to bottom right,transparent calc(50% - 1px),var(--focus) 50%,transparent calc(50% + 1px));opacity:.55}
+body.zones .z::after{position:absolute;left:0;top:0;z-index:3;padding:.1rem .6rem;border-radius:0 0 8px 0;background:var(--focus);color:var(--focus-fg);font-size:.875rem;font-weight:700}
+body.zones .z-po::after{content:"Primary optical"}
+body.zones .z-sf::after{content:"Strong fallow"}
+body.zones .z-wf::after{content:"Weak fallow"}
+body.zones .z-t::after{content:"Terminal"}
+body.zones .z{outline:2px dashed var(--focus);outline-offset:6px}
+
+.zbtn{min-height:var(--tap);padding:0 1rem;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.zbtn[aria-pressed="true"]{background:var(--focus);color:var(--focus-fg);border-color:var(--focus)}
+
+/* PRODUCT VIEW */
+button.shot{border:0;padding:0;width:100%;cursor:pointer;position:relative;color:var(--edge)}
+.vbadge{position:absolute;right:.75rem;bottom:.75rem;width:2.5rem;height:2.5rem;border-radius:50%;background:var(--ink);color:var(--on-ink);display:grid;place-items:center}
+.shot .vbadge svg{width:1rem;opacity:1}
+.price{font-weight:700;font-size:1.3rem;font-variant-numeric:tabular-nums}
+dialog.pv{margin:auto;padding:0;border:1px solid var(--line);border-radius:24px;width:min(100%,78rem);max-width:100%;max-height:min(100svh,58rem);background:var(--bg);color:var(--ink);overflow:auto;overscroll-behavior:contain}
+dialog.pv[open]{animation:rise .3s var(--ease)}
+dialog.pv::backdrop{background:rgba(5,12,24,.6)}
+dialog.pv[open]::backdrop{animation:fade .3s var(--ease)}
+body:has(dialog.pv[open]){overflow:hidden}
+.pv-in{display:grid;grid-template-columns:minmax(0,1fr) clamp(20rem,34vw,26rem);gap:var(--gap) clamp(1.5rem,3vw,2.5rem);padding:0 var(--gap) var(--gap)}
+.pv-top{grid-column:1/-1;position:sticky;top:0;z-index:6;display:flex;justify-content:flex-end;padding-block:.75rem;background:var(--bg)}
+.pv-media{display:grid;gap:1rem;align-content:start}
+.stage{position:relative;border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.slide{aspect-ratio:16/9;display:grid;place-items:center}
+.slide.flip{animation:fade .3s var(--ease)}
+.slide img,.slide video{width:100%;height:100%;object-fit:contain}
+.ph{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--sk) 55%,var(--surface)));color:var(--edge)}
+.ph>svg{width:20%}
+.play{width:4.5rem;height:4.5rem;border-radius:50%;background:var(--ink);color:var(--on-ink);display:grid;place-items:center}
+.play svg{width:1.8rem;height:1.8rem}
+.ar{position:absolute;top:50%;translate:0 -50%;background:var(--bg)}
+.ar-l{left:.75rem}.ar-r{right:.75rem}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.thumb{aspect-ratio:16/9;min-height:var(--tap);border:1px solid var(--line);border-radius:10px;background:var(--surface);display:grid;place-items:center;padding:0;color:var(--edge);transition:border-color var(--dur) var(--ease)}
+.thumb svg{width:34%;height:auto}
+.thumb[aria-current="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.pv-info{display:flex;flex-direction:column;gap:1.5rem}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0}
+.specs div{display:grid;gap:.2rem}
+.specs dt{font-size:.875rem;font-weight:600;color:var(--muted)}
+.specs dd{margin:0;font-size:.9375rem}
+fieldset.bundle{border:0;margin:0;padding:0;min-width:0}
+.bundle legend{font-weight:700;padding:0;margin-bottom:.5rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.opt{display:flex;align-items:center;gap:.6rem;min-height:3.25rem;padding:.4rem .8rem;border:1px solid var(--line);border-radius:12px;cursor:pointer;font-weight:600;font-size:.9375rem;transition:border-color var(--dur) var(--ease),background-color var(--dur) var(--ease)}
+.opt:has(input:checked){border-color:var(--ink);background:var(--surface)}
+.opt:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
+.opt input{width:1.3rem;height:1.3rem;accent-color:var(--focus);margin:0;flex:none}
+.buy-row{margin-top:auto;position:sticky;bottom:0;z-index:2;display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:1rem 1.25rem;padding:1rem 0;background:var(--bg);border-top:1px solid var(--line)}
+.sum{display:grid;min-width:0}
+.vn{font-size:.875rem;font-weight:600;color:var(--muted)}
+.buy-row .btn{flex:none;min-width:9.5rem;min-height:3.25rem;font-size:1.0625rem}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.toast{position:fixed;left:50%;bottom:calc(6.5rem + env(safe-area-inset-bottom,0px));translate:-50% 0;max-width:min(92vw,28rem);padding:.8rem 1.1rem;border-radius:14px;background:var(--ink);color:var(--on-ink);font-weight:600;z-index:100;opacity:0;pointer-events:none;transition:opacity var(--dur) var(--ease)}
+.toast.on{opacity:1}
+@media(max-width:860px){.pv-in{grid-template-columns:1fr}}
+@media(max-width:599px){dialog.pv{width:100%;height:100%;max-height:100svh;border-radius:0;border-width:0}}
+
+a.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.chip.t{display:inline-flex;align-items:center;min-height:2.25rem;padding:.25rem .9rem;border-radius:999px;background:var(--surface);color:var(--muted);font-weight:600;font-size:.875rem}
+.h1t{margin:0;font-size:var(--fs-3);line-height:1.12;font-weight:700;letter-spacing:-.02em}
+.sub{margin:0;font-size:1.1875rem;max-width:38ch;color:var(--muted)}
+.ph2{margin:0;font-size:var(--fs-2);line-height:1.2;font-weight:700;letter-spacing:-.015em}
+.ptitle{margin:0;font-size:var(--fs-1);line-height:1.25;font-weight:700}
+.ptext{margin:0;max-width:62ch;color:var(--muted)}
+.ctitle{margin:0;font-size:1.1875rem;line-height:1.25;font-weight:700}
+.cdesc{margin:0;font-size:.9375rem;color:var(--muted)}
+.mtitle{margin:0;font-size:var(--fs-2);line-height:1.15;font-weight:700;letter-spacing:-.015em}
+.hint{margin:0 0 .6rem}
+.cl{display:grid;gap:.15rem;overflow-wrap:anywhere}
+.cl strong{font-weight:600}
+.trust small{display:block;font-weight:500;font-size:.875rem;color:var(--muted)}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* v3: brand, nav, product cards, new sections */
+.brand{display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit}
+header .logo{width:clamp(3rem,5vw,3.75rem)}
+.wordmark{font-family:var(--serif);font-weight:700;font-size:1.3rem;letter-spacing:-.01em}
+.nav a{color:var(--muted);font-weight:600;font-size:.9375rem;transition:color var(--dur) var(--ease),background-color var(--dur) var(--ease)}
+@media(hover:hover){.nav a:hover{color:var(--ink);background:var(--surface)}}
+.h1t,.ph2,.ptitle,.ctitle,.mtitle,.stat,.ftitle,.price,.num{font-family:var(--serif)}
+.ph2::before{content:"";display:block;width:2.5rem;height:4px;border-radius:4px;background:var(--yellow);margin-bottom:.9rem}
+.shot{overflow:hidden}
+.shot svg.mock{width:100%;height:100%;opacity:1;display:block}
+.ph>svg.mock{width:100%;height:100%;opacity:1}
+.z-sf .shot{aspect-ratio:16/10}
+.tag{position:absolute;left:.75rem;top:.75rem;padding:.2rem .7rem;border-radius:999px;background:var(--yellow);color:#0B192C;font-weight:700;font-size:.8125rem}
+.was{color:var(--muted);font-size:.9375rem;font-weight:500}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.facts{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.facts .chip.t{min-height:1.9rem;padding:.1rem .7rem;font-size:.8125rem;background:var(--bg)}
+@media(max-width:520px){.card .buy{grid-column:1/-1;justify-self:stretch;justify-content:space-between}}
+.btn.inv{background:#fff;border-color:#fff;color:#0B192C}
+@media(hover:hover){.btn.inv:not(:disabled):hover{background:#E6EDF6;border-color:#E6EDF6;color:#0B192C}}
+.btn.inv:focus-visible{background:#fff;border-color:#fff;color:#0B192C}
+.bundle-cta,.qpanel{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--sp-4) var(--sp-6);padding:var(--card-pad);border-radius:var(--r-lg);background:var(--panel);color:var(--panel-fg)}
+.bundle-cta{margin-top:1.5rem}
+.qpanel{margin-top:1rem}
+.bundle-cta :focus-visible,.qpanel :focus-visible{outline-color:#fff}
+.bundle-cta .cdesc,.bundle-cta .vn,.qpanel .cdesc{color:#C9D5E6}
+.bundle-cta .buy{display:flex;align-items:center;gap:1.5rem}
+.feat-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-4)}
+.fcard{display:grid;align-content:start;gap:var(--sp-2);padding:var(--card-pad);border-radius:var(--r-lg);background:var(--surface)}
+.stat{margin:0;font-size:clamp(1.9rem,3vw,2.4rem);line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.ftitle{margin:0;font-size:1.1875rem;line-height:1.25;font-weight:700}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:var(--sp-4)}
+.steps li{display:grid;align-content:start;gap:var(--sp-2);padding:var(--card-pad);border-radius:var(--r-lg);border:1px solid var(--line)}
+.num{width:2.5rem;height:2.5rem;border-radius:50%;background:var(--ink);color:var(--on-ink);display:grid;place-items:center;font-weight:700;font-size:1.1rem}
+.fine{margin:1.25rem 0 0;color:var(--muted);font-size:.9375rem}
+.notes{display:grid;grid-template-columns:1fr;gap:var(--sp-4)}
+.note-card{display:grid;align-content:start;gap:var(--sp-2);padding:var(--card-pad);border-radius:16px;background:var(--surface);border-left:4px solid var(--ink)}
+.note-card.key{border-left-color:var(--yellow)}
+
+/* v4: responsive guards (phone <600, tablet 600-1023, desktop 1024+) */
+body{overflow-x:clip}
+img,video{max-width:100%;height:auto}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+@media(min-width:600px){.feat-grid,.notes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1024px){.feat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.pol-head{margin-bottom:var(--sp-7)}.sec-head{margin-bottom:var(--sp-5)}}
+@media(max-width:599px){.sec-head{align-items:flex-start}.bundle-cta .buy{width:100%;justify-content:space-between}.contact .btn,.qpanel .btn{width:100%}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="logo" viewBox="118 275 764 449"><g transform="translate(-14 14)"><rect x="168" y="269.5" width="720" height="405" rx="14" fill="none" stroke="var(--ink)" stroke-width="8"/><rect x="140" y="297.5" width="720" height="405" rx="14" fill="var(--ink)"/><polygon transform="translate(500 500) scale(0.9)" points="-130,-140 130,-140 74,-84 -74,-84 -74,84 74,84 74,56 0,56 0,0 130,0 130,140 -130,140" fill="var(--bg)"/></g></symbol>
+<symbol id="slide" viewBox="0 0 48 32"><rect x="2" y="2" width="44" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 22l8-9 6 6 4-4 6 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+<symbol id="i-refund" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
+<symbol id="xmark" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+<symbol id="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header id="toko">
+  <div class="wrap">
+    <a class="brand" href="#toko" aria-label="GentaDeck, home"><svg class="logo" aria-hidden="true"><use href="#logo"/></svg><span class="wordmark">GentaDeck</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#templates">Templates</a><a class="hide-m" href="#included">What’s inside</a><a href="#how">How it works</a><a class="hide-m" href="#policy">Policies</a>
+    </nav>
+    <a class="btn sm" href="#templates">Explore Templates</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero" aria-label="Intro">
+    <div class="z z-po stack" style="gap:1.1rem">
+      <h1 class="h1t">Executive Presentation Templates Built for Clarity</h1>
+      <p class="sub">Finance, Digital Marketing, Business Plan &amp; Product Management decks ready in PowerPoint.</p>
+    </div>
+    <div class="z z-t"><a class="btn" href="#templates">Explore Templates</a><a class="btn ghost" href="#included">See what’s inside</a></div>
+    <div class="z z-wf"><span class="chip t">16:9 Widescreen</span><span class="chip t">Editable Charts &amp; Tables</span><span class="chip t">Instant Download</span></div>
+    <div class="z z-sf"><div class="shot" id="heroShot" role="img" aria-label="GentaDeck template preview"><svg><use href="#slide"/></svg></div></div>
+  </section>
+
+  <section class="wrap sec" id="templates" aria-labelledby="tpl-title">
+    <div class="sec-head">
+      <div class="stack">
+        <h2 class="ph2" id="tpl-title">Choose your template</h2>
+        <p class="cdesc">Four editable PowerPoint decks, 100+ slides each. Buy one, or get all four and save.</p>
+      </div>
+      <div class="ctrl">
+        <button class="arrow prev" id="prev" type="button" aria-label="Previous template"><svg style="transform:scaleX(-1)"><use href="#chev"/></svg></button>
+        <span class="count" id="count" aria-live="polite">1/4</span>
+        <button class="arrow next" id="next" type="button" aria-label="Next template"><svg><use href="#chev"/></svg></button>
+      </div>
+    </div>
+    <div class="rail" id="rail" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Templates carousel">
+    </div>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <div class="bundle-cta">
+      <div class="stack"><h3 class="ctitle">All four decks, one bundle</h3><p class="cdesc" id="bundleTxt"></p></div>
+      <div class="buy"><div class="sum"><span class="price" id="bPrice"></span><span class="vn" id="bSave"></span></div><a class="btn inv" href="#template-all">Get the bundle</a></div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="included" aria-labelledby="inc-title">
+    <div class="pol-head"><h2 class="ph2" id="inc-title">What’s inside</h2><p class="lead">Every deck is built to be edited, not just looked at.</p></div>
+    <div class="feat-grid">
+      <div class="fcard"><p class="stat">105–118</p><h3 class="ftitle">Slides in every deck</h3><p class="cdesc">A complete story from opening to closing, so you start with a full presentation instead of a blank file.</p></div>
+      <div class="fcard"><p class="stat">19–44</p><h3 class="ftitle">Editable charts</h3><p class="cdesc">Native PowerPoint charts. Right-click, choose Edit Data, and type your own numbers.</p></div>
+      <div class="fcard"><p class="stat">22+</p><h3 class="ftitle">Editable tables</h3><p class="cdesc">Ready-made tables for comparisons, plans, and reports. The exact count varies by deck.</p></div>
+      <div class="fcard"><p class="stat">Every slide</p><h3 class="ftitle">Speaker notes</h3><p class="cdesc">Talking points are already written, so you can present with more confidence.</p></div>
+      <div class="fcard"><p class="stat">16:9</p><h3 class="ftitle">Widescreen .pptx</h3><p class="cdesc">13.33 × 7.5 in, ready for projectors, video calls, and exports.</p></div>
+      <div class="fcard"><p class="stat">2 fonts</p><h3 class="ftitle">Included in the ZIP</h3><p class="cdesc">Source Serif 4 and Source Sans 3. Install them before opening the file.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="how" aria-labelledby="how-title">
+    <div class="pol-head"><h2 class="ph2" id="how-title">How it works</h2><p class="lead">From checkout to your first edited slide in three steps.</p></div>
+    <ol class="steps">
+      <li><span class="num" aria-hidden="true">1</span><h3 class="ftitle">Choose</h3><p class="cdesc">Browse the previews and pick one deck, or get all four in the bundle.</p></li>
+      <li><span class="num" aria-hidden="true">2</span><h3 class="ftitle">Pay and download</h3><p class="cdesc">Check out securely. Your download link arrives by email right after payment.</p></li>
+      <li><span class="num" aria-hidden="true">3</span><h3 class="ftitle">Install fonts and edit</h3><p class="cdesc">Install the two fonts from the ZIP, open the .pptx in PowerPoint, and replace the sample content with yours.</p></li>
+    </ol>
+    <p class="fine">Made for Microsoft PowerPoint 2019 and Microsoft 365 on Windows and Mac.</p>
+  </section>
+
+  <section class="wrap sec" id="before-you-buy" aria-labelledby="byb-title">
+    <div class="pol-head"><h2 class="ph2" id="byb-title">Before you buy</h2><p class="lead">Please read these notes so the template works exactly as you expect.</p></div>
+    <div class="notes">
+      <div class="note-card key"><h3 class="ftitle">Photos are not included</h3><p class="cdesc">Preview images use stock photos for demonstration only. The picture placeholders in the file are empty, so you add your own images.</p></div>
+      <div class="note-card"><h3 class="ftitle">Made for Microsoft PowerPoint</h3><p class="cdesc">Works with PowerPoint 2019 and Microsoft 365 on Windows and Mac. Google Slides, Keynote and Canva are not supported and may display differently.</p></div>
+      <div class="note-card"><h3 class="ftitle">Install the fonts first</h3><p class="cdesc">The ZIP includes Source Serif 4 and Source Sans 3. Install them before opening the file, or text and line breaks may shift.</p></div>
+      <div class="note-card"><h3 class="ftitle">Sample content only</h3><p class="cdesc">All company names, people, numbers and charts are fictional. Replace them with your own data before presenting.</p></div>
+      <div class="note-card"><h3 class="ftitle">No animations or Morph</h3><p class="cdesc">All slides are static. No animations, transitions or Morph effects are used, so nothing moves unexpectedly while you edit or present.</p></div>
+      <div class="note-card"><h3 class="ftitle">Digital download</h3><p class="cdesc">No physical item is shipped. Use it for your own presentations and client work. Reselling or sharing the template is not allowed.</p></div>
+    </div>
+    <div class="qpanel"><div class="stack"><h3 class="ctitle">Questions before purchase?</h3><p class="cdesc" id="qtxt">Message GentaDeck on Behance and we will help.</p></div><button class="btn inv" id="qbtn" type="button">Message on Behance</button></div>
+  </section>
+
+  <section class="wrap sec" id="policy" aria-labelledby="pol-title">
+    <div class="pol-head">
+      <h2 class="ph2" id="pol-title">Store Policies &amp; Usage Terms</h2>
+      <p class="lead">Every template is an editable .pptx file, delivered instantly after checkout, with clear terms for how you can use it.</p>
+    </div>
+
+    <div class="pol-grid">
+      <div class="tabs" role="tablist" aria-orientation="vertical" aria-label="Policy type" id="tabs"></div>
+      <div class="body" id="pbody" role="tabpanel"></div>
+    </div>
+
+    <div class="contact"><div class="cl"><strong>Questions about your order?</strong><span id="ctxt"></span></div><button class="btn" id="cbtn" type="button">Contact</button></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="logo" role="img" aria-label="GentaDeck"><use href="#logo"/></svg>
+    <nav class="flinks" aria-label="Footer"><a href="#refund">Refund</a><a href="#license">License</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a id="fbehance" href="#" target="_blank" rel="noopener" hidden>Behance</a><a href="https://www.youtube.com/@GentaDeck" target="_blank" rel="noopener">YouTube</a></nav>
+  </div>
+</footer>
+
+<div class="dock"><a class="btn" href="#templates">Explore Templates</a></div>
+
+<dialog class="pv" id="pv" aria-label="Template details">
+ <div class="pv-in">
+  <div class="pv-top"><button class="arrow" id="pvx" type="button" aria-label="Close"><svg><use href="#xmark"/></svg></button></div>
+  <section class="pv-media a1" aria-label="Previews">
+    <div class="stage" id="stage"><div class="slide" id="slide"></div>
+      <button class="arrow ar ar-l" id="arl" type="button" aria-label="Previous preview"><svg style="transform:scaleX(-1)"><use href="#chev"/></svg></button>
+      <button class="arrow ar ar-r" id="arr" type="button" aria-label="Next preview"><svg><use href="#chev"/></svg></button>
+    </div>
+    <div class="thumbs a3" id="thumbs"></div>
+  </section>
+  <aside class="pv-info a2" aria-label="Product info">
+    <div class="chips"><span class="chip t">16:9 Widescreen</span><span class="chip t">Editable Charts &amp; Tables</span><span class="chip t">Instant Download</span></div>
+    <div class="stack"><h2 class="mtitle" id="mt"></h2><p class="cdesc" id="md"></p></div>
+    <dl class="specs"><div><dt>Format</dt><dd>.pptx (PowerPoint)</dd></div><div><dt>License</dt><dd>Non-exclusive</dd></div><div><dt>Slides</dt><dd id="sSlides"></dd></div><div><dt>Charts</dt><dd id="sCharts"></dd></div></dl>
+    <fieldset class="bundle"><legend>Build your bundle</legend><p class="cdesc hint">Pick 1 to 4 decks. Your total updates automatically.</p><div class="opts" id="opts"></div></fieldset>
+    <ul class="trust" aria-label="Purchase info">
+      <li><a href="#refund"><svg><use href="#i-refund"/></svg><span><b>Refund</b><small>Final sale; replacement for corrupted files</small></span></a></li>
+      <li><a href="#license"><svg><use href="#i-doc"/></svg><span><b>License</b><small>Personal, client &amp; pitch use</small></span></a></li>
+      <li><div><svg><use href="#i-lock"/></svg><span><b>Secure checkout</b><small id="payTxt">Processed by Lemon Squeezy</small></span></div></li>
+    </ul>
+    <div class="buy-row a4"><div class="sum" aria-live="polite"><span class="price" id="pvprice">$9</span><span class="vn" id="pvvar">Variant 1</span></div><button class="btn" id="pvbuy" type="button">Buy</button></div>
+  </aside>
+ </div>
+ <div class="toast" role="status"></div>
+</dialog>
+<div class="toast" role="status"></div>
+
+<script>
+(function(){
+  var rail=document.getElementById('rail'),dots=document.getElementById('dots'),count=document.getElementById('count');
+  var CFG={names:['Finance','Digital Marketing','Business Plan','Product Management'],
+    titles:['Finance Presentation Template','Digital Marketing Presentation Template','Business Plan Presentation Template','Product Management Presentation Template'],
+    desc:['Annual reviews, financial statements, valuation & board decks','Campaign reviews, funnels, roadmaps & growth decks','Market analysis, competition matrix, business models & pitch decks','Product roadmaps, prioritization, metrics & launch decks'],price:{1:19,2:34,3:43,4:49}, /* launch price by number of decks (USD) */
+    was:29, /* regular single-deck price, shown crossed out; set 0 to hide */
+    slides:[109,118,105,108], charts:[44,33,23,19],
+    pal:[['#0B2A4A','#1596AB','#EEF3F7'],['#2E1F6B','#E5487F','#F2EFFA'],['#0F4C5C','#F2B84B','#EDF3F4'],['#2B2F3A','#38BDF8','#F2F3F8']], /* deck colours: main, accent, paper */
+    pay:'Lemon Squeezy', /* payment provider name shown on the page and in policies */
+    behance:'', /* your Behance profile URL (optional) */
+    email:'gentadeck@gmail.com', /* your Gmail address for the Contact box, e.g. 'name@gmail.com' */
+    url:{}, /* variant number (1-15) -> Lemon Squeezy checkout URL, e.g. url[5]='https://STORE.lemonsqueezy.com/buy/...' */
+    media:[{t:'img',src:''},{t:'img',src:''},{t:'img',src:''},{t:'vid',src:'',poster:''}]}; /* src = image/video URL */
+  var N=4,i,cards=[],PAY=CFG.pay;
+  function sum(a){return a.reduce(function(x,y){return x+y},0)}
+  var sumS=sum(CFG.slides),sumC=sum(CFG.charts);
+  /* temporary slide mock-up in each deck's own colours; replaced by real previews via CFG.media */
+  function mock(k){var p=CFG.pal[k],a=p[0],b=p[1],c=p[2],h=[30,44,36,54],bars='',x;
+    for(x=0;x<4;x++)bars+='<rect x="'+(14+x*15)+'" y="'+(76-h[x])+'" width="10" height="'+h[x]+'" rx="2" fill="'+(x%2?b:a)+'"/>';
+    return '<svg class="mock" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="90" fill="'+c+'"/><rect x="12" y="10" width="62" height="6" rx="3" fill="'+a+'"/><rect x="12" y="21" width="40" height="3" rx="1.5" fill="'+a+'" opacity=".35"/>'+bars+'<rect x="84" y="30" width="62" height="46" rx="5" fill="#fff"/><circle cx="106" cy="53" r="12" fill="none" stroke="'+b+'" stroke-width="7"/><rect x="124" y="42" width="16" height="3" rx="1.5" fill="'+a+'" opacity=".5"/><rect x="124" y="50" width="12" height="3" rx="1.5" fill="'+a+'" opacity=".3"/><rect x="124" y="58" width="14" height="3" rx="1.5" fill="'+a+'" opacity=".3"/></svg>'}
+  document.getElementById('heroShot').innerHTML=mock(0);
+  document.getElementById('bundleTxt').textContent=sumS+' slides and '+sumC+' editable charts across all four templates.';
+  document.getElementById('bPrice').textContent='$'+CFG.price[4];
+  document.getElementById('bSave').textContent='Save $'+(CFG.price[1]*N-CFG.price[4])+' vs. buying separately';
+  for(i=0;i<N;i++){
+    var c=document.createElement('article');
+    c.className='card'+(i===0?' on':'');
+    c.setAttribute('role','group');c.setAttribute('aria-roledescription','slide');c.setAttribute('aria-label',(i+1)+' of '+N);
+    c.innerHTML='<button class="shot" type="button" data-open="'+i+'" aria-label="View '+CFG.names[i]+' details and previews">'+mock(i)+(CFG.was?'<span class="tag">Launch price</span>':'')+'<span class="vbadge" aria-hidden="true"><svg><use href="#play"/></svg></span></button>'
+      +'<div class="meta stack"><h3 class="ctitle">'+CFG.titles[i]+'</h3><p class="cdesc">'+CFG.desc[i]+'</p><div class="facts"><span class="chip t">'+CFG.slides[i]+' slides</span><span class="chip t">'+CFG.charts[i]+' charts</span></div></div>'
+      +'<div class="buy"><span class="price">$'+CFG.price[1]+'</span>'+(CFG.was?'<s class="was"><span class="vh">Regular price </span>$'+CFG.was+'</s>':'')+'<button class="btn sm" type="button" data-buy="'+i+'">Buy</button></div>';
+    rail.appendChild(c);cards.push(c);
+    var d=document.createElement('i');if(i===0)d.className='on';dots.appendChild(d);
+  }
+  var prev=document.getElementById('prev'),next=document.getElementById('next');
+  function step(){var a=cards[1]?cards[1].offsetLeft-cards[0].offsetLeft:rail.clientWidth;return a}
+  function idx(){return Math.max(0,Math.min(N-1,Math.round(rail.scrollLeft/step())))}
+  function sync(){
+    var k=idx(),atEnd=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4;
+    if(atEnd)k=N-1;
+    cards.forEach(function(c,j){c.classList.toggle('on',j===k)});
+    [].forEach.call(dots.children,function(x,j){x.classList.toggle('on',j===k)});
+    count.textContent=(k+1)+'/'+N;
+    prev.disabled=rail.scrollLeft<4;next.disabled=atEnd;
+  }
+  next.onclick=function(){rail.scrollBy({left:step()})};
+  prev.onclick=function(){rail.scrollBy({left:-step()})};
+  rail.addEventListener('scroll',function(){requestAnimationFrame(sync)},{passive:true});
+  rail.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){e.preventDefault();next.click()}
+    if(e.key==='ArrowLeft'){e.preventDefault();prev.click()}
+  });
+  sync();
+  var drag=null,moved=false;
+  rail.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;drag={x:e.clientX,s:rail.scrollLeft};moved=false});
+  window.addEventListener('pointermove',function(e){
+    if(!drag)return;var dx=e.clientX-drag.x;
+    if(Math.abs(dx)>6&&!moved){moved=true;rail.style.scrollSnapType='none';rail.style.scrollBehavior='auto';rail.style.cursor='grabbing'}
+    if(moved)rail.scrollLeft=drag.s-dx;
+  });
+  window.addEventListener('pointerup',function(){
+    if(!drag)return;var was=moved;drag=null;
+    if(was){var t=Math.round(rail.scrollLeft/step())*step();rail.style.scrollBehavior='';rail.style.scrollSnapType='';rail.scrollTo({left:t})}
+    rail.style.cursor='';
+  });
+  rail.addEventListener('click',function(e){if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+
+  /* policy tabs */
+  var tabs=document.getElementById('tabs'),pbody=document.getElementById('pbody');
+  var POL={
+    refund:[['All Sales Are Final (Digital Downloads)','Because GentaDeck templates are digital products delivered instantly after checkout, files cannot be returned once downloaded or accessed; therefore, all sales are final and non-refundable.'],
+      ['Corrupted or Broken Files','If you receive a damaged file, missing slide file, or broken download link, email gentadeck@gmail.com within 7 days of purchase with your order confirmation, and we will provide a working replacement file.'],
+      ['Global Checkout & Payment Processing','Orders are processed globally via '+PAY+' as Merchant of Record; please review product previews, software compatibility, and bundle selections before completing payment.']],
+    license:[['Permitted Use','You receive a non-exclusive, non-transferable license to use GentaDeck PowerPoint templates for personal, educational, internal corporate, client presentation, pitch, and webinar purposes.'],
+      ['Restricted Use','You may not resell, sublicense, redistribute, share for free, or offer these templates (or modified versions of them) as standalone templates, stock assets, or competing template products.'],
+      ['Third-Party Open-Source Assets','Included icons use Google Material Design Icons (Apache License 2.0) and fonts use Source Serif 4 and Source Sans 3 (Google Fonts / SIL Open Font License 1.1).']],
+    privacy:[['Data Collected','GentaDeck does not directly store your credit card, debit card, or bank account details. Payments are processed by '+PAY+', which shares basic order information (such as your name and email address) so we can deliver files and support your order.'],
+      ['How We Use Your Information','Your email and order details are used strictly to deliver download access, provide customer support via gentadeck@gmail.com, and send essential transaction notices—never daily spam.'],
+      ['No Data Selling','We do not sell, rent, or trade your personal data to third parties; data is only shared with infrastructure required to fulfill your order (such as '+PAY+').']],
+    terms:[['Acceptance of Terms','By purchasing or downloading any template from GentaDeck, you agree to these Terms of Use, the License terms, and the Refund Policy.'],
+      ['Software & Font Compatibility','Templates are made for Microsoft PowerPoint 2019 and Microsoft 365 on Windows and Mac. Google Slides, Keynote, and Canva are not supported and may display differently. Install the included fonts (Source Serif 4 and Source Sans 3) before opening the file, or text and line breaks may shift.'],
+      ['Preview Photos & Sample Content','Preview images use stock photos for demonstration only; the picture placeholders in the file are empty. All company names, people, numbers, and charts are fictional sample content.'],
+      ['Support & Updates','For technical questions or file replacement requests, contact gentadeck@gmail.com.']]
+  };
+  var KEYS=['refund','license','privacy','terms'],NAMES=['Refund','License','Privacy','Terms'],curTab=0;
+  NAMES.forEach(function(n,j){
+    var b=document.createElement('button');b.className='tab';b.type='button';b.id='tab-'+KEYS[j];b.setAttribute('role','tab');
+    b.setAttribute('aria-selected',j===0);b.setAttribute('aria-controls','pbody');b.tabIndex=j===0?0:-1;b.textContent=n;
+    b.onclick=function(){selTab(j)};
+    tabs.appendChild(b);
+  });
+  tabs.addEventListener('keydown',function(e){
+    var k=e.key,n=NAMES.length,j=curTab;
+    if(k==='ArrowDown'||k==='ArrowRight')j=(curTab+1)%n;
+    else if(k==='ArrowUp'||k==='ArrowLeft')j=(curTab-1+n)%n;
+    else if(k==='Home')j=0;
+    else if(k==='End')j=n-1;
+    else return;
+    e.preventDefault();selTab(j);tabs.children[j].focus();
+  });
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function fill(){
+    var h='';
+    POL[KEYS[curTab]].forEach(function(x){h+='<div class="pitem"><h3 class="ptitle">'+esc(x[0])+'</h3><p class="ptext">'+esc(x[1])+'</p></div>'});
+    h+='<div class="callout"><strong>Need help with your file?</strong> Contact '+CFG.email+' with your order details and we will assist you promptly.</div>';
+    pbody.style.animation='none';void pbody.offsetWidth;pbody.style.animation='';
+    pbody.innerHTML=h;
+    pbody.setAttribute('aria-labelledby','tab-'+KEYS[curTab]);
+  }
+  fill();
+
+  /* product view */
+  var pv=document.getElementById('pv'),slide=document.getElementById('slide'),thumbs=document.getElementById('thumbs'),opts=document.getElementById('opts'),
+      pvp=document.getElementById('pvprice'),pvv=document.getElementById('pvvar'),pvb=document.getElementById('pvbuy'),cur=0,sel=[0],prod=0;
+  var COMBOS=['A','B','C','D','AB','AC','AD','BC','BD','CD','ABC','ABD','ACD','BCD','ABCD']; /* = variants 1..15 */
+  function sorted(){return sel.slice().sort(function(a,b){return a-b})}
+  function variantOf(s){return COMBOS.indexOf(s.map(function(x){return 'ABCD'.charAt(x)}).join(''))+1}
+  var toasts=document.querySelectorAll('.toast'),tt;
+  function say(m){[].forEach.call(toasts,function(t){t.textContent=m;t.classList.add('on')});clearTimeout(tt);tt=setTimeout(function(){[].forEach.call(toasts,function(t){t.classList.remove('on')})},4500)}
+  function checkout(v){var u=CFG.url[v];if(!u){say('Checkout link for variant '+v+' is not set yet.');return}window.open(u,'_blank','noopener')}
+  CFG.media.forEach(function(m,k){
+    var b=document.createElement('button');b.type='button';b.className='thumb';b.setAttribute('aria-label',(m.t==='vid'?'Video preview ':'Image preview ')+(k+1));
+    b.innerHTML='<svg><use href="#'+(m.t==='vid'?'play':'slide')+'"/></svg>';
+    b.onclick=function(){show(k)};thumbs.appendChild(b);
+  });
+  CFG.names.forEach(function(n,k){
+    var l=document.createElement('label');l.className='opt';
+    l.innerHTML='<input type="checkbox" value="'+k+'"><span>'+n+'</span>';opts.appendChild(l);
+  });
+  function show(k){
+    var M=CFG.media.length,m,h;cur=(k+M)%M;m=CFG.media[cur];
+    if(m.src){h=m.t==='vid'?'<video controls playsinline preload="metadata" poster="'+(m.poster||'')+'" src="'+m.src+'"></video>':'<img alt="Preview '+(cur+1)+'" src="'+m.src+'">'}
+    else h='<div class="ph" role="img" aria-label="'+(m.t==='vid'?'Video':'Image')+' preview placeholder">'+(m.t==='vid'?'<span class="play"><svg><use href="#play"/></svg></span>':mock(prod))+'</div>';
+    slide.innerHTML=h;slide.classList.remove('flip');void slide.offsetWidth;slide.classList.add('flip');
+    [].forEach.call(thumbs.children,function(t,j){t.setAttribute('aria-current',j===cur)});
+  }
+  function upd(){
+    var s=sorted(),v=s.length?variantOf(s):0;
+    [].forEach.call(opts.querySelectorAll('input'),function(c){c.checked=sel.indexOf(+c.value)>-1});
+    pvp.textContent=v?'$'+CFG.price[s.length]:'$0';
+    pvv.textContent=v?s.length+(s.length>1?' templates · Save $'+(CFG.price[1]*s.length-CFG.price[s.length]):' template'):'Select at least one template';
+    pvb.disabled=!v;
+  }
+  opts.addEventListener('change',function(){sel=[].filter.call(opts.querySelectorAll('input'),function(c){return c.checked}).map(function(c){return +c.value});upd()});
+  pvb.onclick=function(){checkout(variantOf(sorted()))};
+  document.getElementById('pvx').onclick=function(){pv.close()};
+  document.getElementById('arl').onclick=function(){show(cur-1)};
+  document.getElementById('arr').onclick=function(){show(cur+1)};
+  pv.addEventListener('keydown',function(e){if(e.target.closest('input,video'))return;if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
+  pv.addEventListener('close',function(){if(/^#template-/.test(location.hash)){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){location.hash='#templates'}}});
+  pv.addEventListener('click',function(e){if(e.target===pv)pv.close()});
+  function openPV(i,pre){var all=!!pre;prod=i;sel=all?pre.slice():[i];document.getElementById('mt').textContent=all?'The Complete GentaDeck Bundle':CFG.titles[i];document.getElementById('md').textContent=all?'All four decks: Finance, Digital Marketing, Business Plan, and Product Management.':CFG.desc[i];document.getElementById('sSlides').textContent=all?sumS+' in total':CFG.slides[i]+' slides';document.getElementById('sCharts').textContent=all?sumC+' in total':CFG.charts[i]+' charts';upd();show(0);if(!pv.open)pv.showModal();pv.scrollTop=0}
+  rail.addEventListener('click',function(e){
+    var o=e.target.closest('[data-open]'),b=e.target.closest('[data-buy]');
+    if(o)location.hash='#template-'+'abcd'.charAt(+o.dataset.open);
+    else if(b)checkout(+b.dataset.buy+1);
+  });
+
+  /* contact via Gmail */
+  var ct=document.getElementById('ctxt');
+  if(CFG.email){ct.className='';ct.style.cssText='font-weight:600;overflow-wrap:anywhere;color:var(--muted)';ct.textContent=CFG.email}
+  document.getElementById('cbtn').onclick=function(){
+    if(!CFG.email){say('Email address is not set yet.');return}
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(CFG.email)+'&su='+encodeURIComponent('GentaDeck question'),'_blank','noopener');
+  };
+
+  /* questions panel + payment label */
+  var qb=document.getElementById('qbtn'),qt=document.getElementById('qtxt'),fb=document.getElementById('fbehance');
+  document.getElementById('payTxt').textContent='Processed by '+PAY;
+  if(CFG.behance){fb.href=CFG.behance;fb.hidden=false}else{qb.textContent='Email us';qt.textContent='Email '+CFG.email+' and we will help.'}
+  qb.onclick=function(){if(CFG.behance)window.open(CFG.behance,'_blank','noopener');else document.getElementById('cbtn').click()};
+
+  /* hash views */
+  function selTab(j){curTab=j;[].forEach.call(tabs.children,function(t,k){t.setAttribute('aria-selected',k===j);t.tabIndex=k===j?0:-1});fill()}
+  function route(){
+    var h=location.hash,m=/^#template-([a-d]|all)$/.exec(h),t=/^#(refund|license|privacy|terms)$/.exec(h);
+    if(m){if(m[1]==='all')openPV(0,[0,1,2,3]);else openPV(m[1].charCodeAt(0)-97);return}
+    if(pv.open)pv.close();
+    if(t)selTab(['refund','license','privacy','terms'].indexOf(t[1]));
+    if(t||h==='#policy')document.getElementById('policy').scrollIntoView();
+  }
+  window.addEventListener('hashchange',route);route();
+
+})();
+</script>
+</body>
+</html>
