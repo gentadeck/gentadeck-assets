@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B192C" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem('gd-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <title>GentaDeck – PowerPoint Template Store Layout</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +16,7 @@
   --bg:#FFFFFF; --surface:#F2F5F9; --line:#E1E7EF; --edge:#8294AC; --sk:#CBD5E3; --ink:#0B192C; --on-ink:#FFFFFF; --muted:#52627A; --focus:#2459B3; --focus-fg:#FFFFFF;
   --fs-0:1.0625rem; --fs-1:1.3rem; --fs-2:1.625rem; --fs-3:clamp(2rem,4vw,3.05rem);
   --gap:clamp(1rem,2.4vw,2rem); --r:14px; --tap:max(44px,2.75rem); --maxw:75rem;
-  --ease:cubic-bezier(.22,1,.36,1); --dur:.4s; --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --panel:#0B192C; --panel-fg:#FFFFFF; --yellow:#F2B84B; --sp-1:.25rem; --sp-2:.5rem; --sp-3:.75rem; --sp-4:1rem; --sp-5:1.5rem; --sp-6:2rem; --sp-7:3rem; --sp-8:4rem; --sp-9:5rem; --pad:1rem; --card-pad:1.25rem; --r-lg:24px;
+  --ease:cubic-bezier(.22,1,.36,1); --dur:.4s; --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --panel:#0B192C; --panel-fg:#FFFFFF; --yellow:#F2B84B; --sp-1:.25rem; --sp-2:.5rem; --sp-3:.75rem; --sp-4:1rem; --sp-5:1.5rem; --sp-6:2rem; --sp-7:3rem; --sp-8:4rem; --sp-9:5rem; --pad:1rem; --card-pad:1.25rem; --r-lg:24px; color-scheme:light;
   box-sizing:border-box; padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px); -webkit-text-size-adjust:100%; text-size-adjust:100%;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B192C;--surface:#12263F;--line:#22395A;--edge:#7E93B0;--sk:#2C4768;--ink:#FFFFFF;--on-ink:#0B192C;--muted:#A9B8CE;--focus:#8DB8FF;--focus-fg:#0B192C;--panel:#1B365A;color-scheme:dark}}
@@ -48,7 +52,14 @@ header .wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:center
 .nav{display:flex;justify-content:flex-end;gap:.5rem}
 .nav a,.nav button{min-height:var(--tap);display:inline-flex;align-items:center;padding:0 1rem;border-radius:999px;border:1px solid transparent;background:none;text-decoration:none;color:inherit}
 .nav a[aria-current="page"]{border-color:var(--line);background:var(--surface)}
-@media(max-width:720px){header .btn{display:none}header .wrap{grid-template-columns:auto 1fr}.nav{overflow-x:auto;scrollbar-width:none;gap:0}.nav .hide-m{display:none}.wordmark{font-size:1.15rem}}
+@media(max-width:900px){
+  header .hact .btn{display:none}header .wrap{grid-template-columns:1fr auto;padding-block:.5rem}
+  header .logo{width:2.75rem}.wordmark{font-size:1.15rem}
+  header .menu-btn{display:grid}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;padding:var(--sp-2) var(--pad) var(--sp-4);background:var(--bg);border-bottom:1px solid var(--line)}
+  .nav.open{display:flex}
+  .nav a{min-height:3rem;border-radius:12px;font-size:1rem}
+}
 
 /* HERO: text + CTA + chips on the left, preview on the right */
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-template-rows:auto auto auto;align-content:center;align-items:center;column-gap:clamp(2rem,5vw,4.5rem);row-gap:var(--sp-5);min-height:min(70vh,38rem);min-height:min(70svh,38rem);padding-block:var(--sp-7) var(--sp-8);position:relative}
@@ -265,35 +276,76 @@ header .logo{width:clamp(3rem,5vw,3.75rem)}
 .note-card.key{border-left-color:var(--yellow)}
 
 /* v4: responsive guards (phone <600, tablet 600-1023, desktop 1024+) */
-body{overflow-x:clip}
+body{overflow-x:hidden;overflow-x:clip}
 img,video{max-width:100%;height:auto}
 h1,h2,h3{text-wrap:balance}
 p{text-wrap:pretty}
 @media(min-width:600px){.feat-grid,.notes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1024px){.feat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.pol-head{margin-bottom:var(--sp-7)}.sec-head{margin-bottom:var(--sp-5)}}
 @media(max-width:599px){.sec-head{align-items:flex-start}.bundle-cta .buy{width:100%;justify-content:space-between}.contact .btn,.qpanel .btn{width:100%}}
+
+/* v5: media gallery, header controls, cross-device buttons */
+.btn{white-space:nowrap}
+button,a{-webkit-tap-highlight-color:transparent}
+button,.btn,.tab,.arrow,.thumb,.opt{touch-action:manipulation}
+.hact{display:flex;align-items:center;gap:var(--sp-2)}
+.logo{aspect-ratio:764/449;height:auto;flex:none}
+.z-t{justify-self:stretch}
+.ibtn{width:var(--tap);height:var(--tap);padding:0;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);display:grid;place-items:center;transition:background-color var(--dur) var(--ease)}
+.ibtn:hover{background:var(--surface)}
+.ibtn svg{width:1.25rem;height:1.25rem}
+.menu-btn{display:none}
+dialog.pv:focus{outline:none}
+.shot,.ph{position:relative}
+.shot .cover,.ph .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vfacade{position:relative;width:100%;height:100%;padding:0;border:0;background:#000;display:grid;place-items:center;cursor:pointer}
+.slide .vposter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vfacade .play{position:relative}
+.slide iframe{width:100%;height:100%;border:0;display:block}
+.soon{position:absolute;left:50%;bottom:var(--sp-4);translate:-50% 0;padding:.3rem .9rem;border-radius:999px;background:var(--panel);color:#fff;font-weight:600;font-size:.875rem;white-space:nowrap}
+.thumbs{display:flex;gap:.6rem;overflow-x:auto;scroll-snap-type:x proximity;padding:2px;scrollbar-width:thin}
+.thumb{flex:0 0 clamp(5.5rem,17%,7.5rem);position:relative;overflow:hidden;scroll-snap-align:start}
+.thumb svg.mock{width:100%;height:100%}
+.tplay{position:absolute;right:.3rem;bottom:.3rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--ink);color:var(--on-ink);display:grid;place-items:center}
+.thumb .tplay svg{width:.7rem;height:.7rem}
+@media(max-width:720px){
+  .dock{justify-content:center}.dock .btn{width:100%;max-width:26rem}
+  .z-t .btn:not(.ghost){display:none}
+}
+@media(max-width:599px){
+  .bundle-cta .buy{flex-direction:column;align-items:stretch}.bundle-cta .buy .btn{width:100%}
+  .pv-top{padding-top:calc(.75rem + env(safe-area-inset-top,0px))}
+  .pv-in{padding-left:max(var(--gap),env(safe-area-inset-left,0px));padding-right:max(var(--gap),env(safe-area-inset-right,0px))}
+  .buy-row{padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px))}
+}
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="logo" viewBox="118 275 764 449"><g transform="translate(-14 14)"><rect x="168" y="269.5" width="720" height="405" rx="14" fill="none" stroke="var(--ink)" stroke-width="8"/><rect x="140" y="297.5" width="720" height="405" rx="14" fill="var(--ink)"/><polygon transform="translate(500 500) scale(0.9)" points="-130,-140 130,-140 74,-84 -74,-84 -74,84 74,84 74,56 0,56 0,0 130,0 130,140 -130,140" fill="var(--bg)"/></g></symbol>
-<symbol id="slide" viewBox="0 0 48 32"><rect x="2" y="2" width="44" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 22l8-9 6 6 4-4 6 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+<symbol id="i-slide" viewBox="0 0 48 32"><rect x="2" y="2" width="44" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 22l8-9 6 6 4-4 6 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
 <symbol id="i-refund" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM14 3v5h5M10 13h6M10 17h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="i-lock" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 <symbol id="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
 <symbol id="xmark" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
 <symbol id="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17z" fill="currentColor"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
 </defs></svg>
 
 <header id="toko">
   <div class="wrap">
     <a class="brand" href="#toko" aria-label="GentaDeck, home"><svg class="logo" aria-hidden="true"><use href="#logo"/></svg><span class="wordmark">GentaDeck</span></a>
-    <nav class="nav" aria-label="Main">
+    <nav class="nav" id="nav" aria-label="Main">
       <a href="#templates">Templates</a><a class="hide-m" href="#included">What’s inside</a><a href="#how">How it works</a><a class="hide-m" href="#policy">Policies</a>
     </nav>
-    <a class="btn sm" href="#templates">Explore Templates</a>
+    <div class="hact">
+      <button class="ibtn" id="themeBtn" type="button" aria-label="Theme: system"><svg aria-hidden="true"><use href="#i-theme"/></svg></button>
+      <button class="ibtn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <a class="btn sm" href="#templates">Explore Templates</a>
+    </div>
   </div>
 </header>
 
@@ -305,7 +357,7 @@ p{text-wrap:pretty}
     </div>
     <div class="z z-t"><a class="btn" href="#templates">Explore Templates</a><a class="btn ghost" href="#included">See what’s inside</a></div>
     <div class="z z-wf"><span class="chip t">16:9 Widescreen</span><span class="chip t">Editable Charts &amp; Tables</span><span class="chip t">Instant Download</span></div>
-    <div class="z z-sf"><div class="shot" id="heroShot" role="img" aria-label="GentaDeck template preview"><svg><use href="#slide"/></svg></div></div>
+    <div class="z z-sf"><div class="shot" id="heroShot" role="img" aria-label="GentaDeck template preview"><svg><use href="#i-slide"/></svg></div></div>
   </section>
 
   <section class="wrap sec" id="templates" aria-labelledby="tpl-title">
@@ -335,7 +387,7 @@ p{text-wrap:pretty}
       <div class="fcard"><p class="stat">105–118</p><h3 class="ftitle">Slides in every deck</h3><p class="cdesc">A complete story from opening to closing, so you start with a full presentation instead of a blank file.</p></div>
       <div class="fcard"><p class="stat">19–44</p><h3 class="ftitle">Editable charts</h3><p class="cdesc">Native PowerPoint charts. Right-click, choose Edit Data, and type your own numbers.</p></div>
       <div class="fcard"><p class="stat">22+</p><h3 class="ftitle">Editable tables</h3><p class="cdesc">Ready-made tables for comparisons, plans, and reports. The exact count varies by deck.</p></div>
-      <div class="fcard"><p class="stat">Every slide</p><h3 class="ftitle">Speaker notes</h3><p class="cdesc">Talking points are already written, so you can present with more confidence.</p></div>
+      <div class="fcard"><p class="stat">Static</p><h3 class="ftitle">No animations or Morph</h3><p class="cdesc">Every slide is static, so nothing moves unexpectedly while you edit or present.</p></div>
       <div class="fcard"><p class="stat">16:9</p><h3 class="ftitle">Widescreen .pptx</h3><p class="cdesc">13.33 × 7.5 in, ready for projectors, video calls, and exports.</p></div>
       <div class="fcard"><p class="stat">2 fonts</p><h3 class="ftitle">Included in the ZIP</h3><p class="cdesc">Source Serif 4 and Source Sans 3. Install them before opening the file.</p></div>
     </div>
@@ -428,7 +480,9 @@ p{text-wrap:pretty}
     behance:'', /* your Behance profile URL (optional) */
     email:'gentadeck@gmail.com', /* your Gmail address for the Contact box, e.g. 'name@gmail.com' */
     url:{}, /* variant number (1-15) -> Lemon Squeezy checkout URL, e.g. url[5]='https://STORE.lemonsqueezy.com/buy/...' */
-    media:[{t:'img',src:''},{t:'img',src:''},{t:'img',src:''},{t:'vid',src:'',poster:''}]}; /* src = image/video URL */
+    slugs:['finance','digital-marketing','business-plan','product-management'],
+    video:['Y6ThP63pJlQ','uw4VEY2uuqI','b3C5iNvTvJs',''], /* YouTube video IDs; leave '' until the link is ready */
+    dir:'previews/', ext:'jpg', photos:10}; /* photo files: previews/<slug>-01.jpg to -10.jpg (16:9) */
   var N=4,i,cards=[],PAY=CFG.pay;
   function sum(a){return a.reduce(function(x,y){return x+y},0)}
   var sumS=sum(CFG.slides),sumC=sum(CFG.charts);
@@ -436,7 +490,7 @@ p{text-wrap:pretty}
   function mock(k){var p=CFG.pal[k],a=p[0],b=p[1],c=p[2],h=[30,44,36,54],bars='',x;
     for(x=0;x<4;x++)bars+='<rect x="'+(14+x*15)+'" y="'+(76-h[x])+'" width="10" height="'+h[x]+'" rx="2" fill="'+(x%2?b:a)+'"/>';
     return '<svg class="mock" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="90" fill="'+c+'"/><rect x="12" y="10" width="62" height="6" rx="3" fill="'+a+'"/><rect x="12" y="21" width="40" height="3" rx="1.5" fill="'+a+'" opacity=".35"/>'+bars+'<rect x="84" y="30" width="62" height="46" rx="5" fill="#fff"/><circle cx="106" cy="53" r="12" fill="none" stroke="'+b+'" stroke-width="7"/><rect x="124" y="42" width="16" height="3" rx="1.5" fill="'+a+'" opacity=".5"/><rect x="124" y="50" width="12" height="3" rx="1.5" fill="'+a+'" opacity=".3"/><rect x="124" y="58" width="14" height="3" rx="1.5" fill="'+a+'" opacity=".3"/></svg>'}
-  document.getElementById('heroShot').innerHTML=mock(0);
+  document.getElementById('heroShot').innerHTML=mock(0);photo(document.getElementById('heroShot'),pic(0,1),'GentaDeck Finance template preview');
   document.getElementById('bundleTxt').textContent=sumS+' slides and '+sumC+' editable charts across all four templates.';
   document.getElementById('bPrice').textContent='$'+CFG.price[4];
   document.getElementById('bSave').textContent='Save $'+(CFG.price[1]*N-CFG.price[4])+' vs. buying separately';
@@ -447,7 +501,7 @@ p{text-wrap:pretty}
     c.innerHTML='<button class="shot" type="button" data-open="'+i+'" aria-label="View '+CFG.names[i]+' details and previews">'+mock(i)+(CFG.was?'<span class="tag">Launch price</span>':'')+'<span class="vbadge" aria-hidden="true"><svg><use href="#play"/></svg></span></button>'
       +'<div class="meta stack"><h3 class="ctitle">'+CFG.titles[i]+'</h3><p class="cdesc">'+CFG.desc[i]+'</p><div class="facts"><span class="chip t">'+CFG.slides[i]+' slides</span><span class="chip t">'+CFG.charts[i]+' charts</span></div></div>'
       +'<div class="buy"><span class="price">$'+CFG.price[1]+'</span>'+(CFG.was?'<s class="was"><span class="vh">Regular price </span>$'+CFG.was+'</s>':'')+'<button class="btn sm" type="button" data-buy="'+i+'">Buy</button></div>';
-    rail.appendChild(c);cards.push(c);
+    rail.appendChild(c);cards.push(c);photo(c.querySelector(".shot"),pic(i,1),"");
     var d=document.createElement('i');if(i===0)d.className='on';dots.appendChild(d);
   }
   var prev=document.getElementById('prev'),next=document.getElementById('next');
@@ -536,21 +590,44 @@ p{text-wrap:pretty}
   var toasts=document.querySelectorAll('.toast'),tt;
   function say(m){[].forEach.call(toasts,function(t){t.textContent=m;t.classList.add('on')});clearTimeout(tt);tt=setTimeout(function(){[].forEach.call(toasts,function(t){t.classList.remove('on')})},4500)}
   function checkout(v){var u=CFG.url[v];if(!u){say('Checkout link for variant '+v+' is not set yet.');return}window.open(u,'_blank','noopener')}
-  CFG.media.forEach(function(m,k){
-    var b=document.createElement('button');b.type='button';b.className='thumb';b.setAttribute('aria-label',(m.t==='vid'?'Video preview ':'Image preview ')+(k+1));
-    b.innerHTML='<svg><use href="#'+(m.t==='vid'?'play':'slide')+'"/></svg>';
-    b.onclick=function(){show(k)};thumbs.appendChild(b);
-  });
   CFG.names.forEach(function(n,k){
     var l=document.createElement('label');l.className='opt';
     l.innerHTML='<input type="checkbox" value="'+k+'"><span>'+n+'</span>';opts.appendChild(l);
   });
+  var list=[];
+  function pad(n){return n<10?'0'+n:''+n}
+  function pic(p,n){return CFG.dir+CFG.slugs[p]+'-'+pad(n)+'.'+CFG.ext}
+  function ytThumb(id){return 'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg'}
+  /* loads a real image on top of the placeholder; a missing file just leaves the placeholder */
+  function photo(box,url,alt){var im=new Image();im.decoding='async';im.alt=alt||'';im.className='cover';im.onload=function(){box.insertBefore(im,box.firstChild)};im.src=url}
+  function mediaFor(i,all){var a=[],p,n;
+    if(all){for(p=0;p<N;p++)a.push({t:'vid',p:p});for(p=0;p<N;p++)a.push({t:'img',p:p,n:1})}
+    else{a.push({t:'vid',p:i});for(n=1;n<=CFG.photos;n++)a.push({t:'img',p:i,n:n})}
+    return a}
+  function buildThumbs(){
+    thumbs.innerHTML='';
+    list.forEach(function(m,k){
+      var b=document.createElement('button'),id=CFG.video[m.p];b.type='button';b.className='thumb';
+      b.setAttribute('aria-label',(m.t==='vid'?'Video preview':'Photo '+m.n)+' ('+CFG.names[m.p]+')');
+      b.innerHTML=mock(m.p)+(m.t==='vid'?'<span class="tplay" aria-hidden="true"><svg><use href="#play"/></svg></span>':'');
+      if(m.t==='vid'){if(id)photo(b,ytThumb(id))}else photo(b,pic(m.p,m.n));
+      b.onclick=function(){show(k)};thumbs.appendChild(b);
+    });
+  }
   function show(k){
-    var M=CFG.media.length,m,h;cur=(k+M)%M;m=CFG.media[cur];
-    if(m.src){h=m.t==='vid'?'<video controls playsinline preload="metadata" poster="'+(m.poster||'')+'" src="'+m.src+'"></video>':'<img alt="Preview '+(cur+1)+'" src="'+m.src+'">'}
-    else h='<div class="ph" role="img" aria-label="'+(m.t==='vid'?'Video':'Image')+' preview placeholder">'+(m.t==='vid'?'<span class="play"><svg><use href="#play"/></svg></span>':mock(prod))+'</div>';
-    slide.innerHTML=h;slide.classList.remove('flip');void slide.offsetWidth;slide.classList.add('flip');
+    var M=list.length,m,h,id,po;cur=(k+M)%M;m=list[cur];id=CFG.video[m.p];
+    if(m.t==='vid'&&id)h='<button class="vfacade" type="button" aria-label="Play video: '+CFG.titles[m.p]+'"><img class="vposter" alt="" src="https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg"><span class="play"><svg><use href="#play"/></svg></span></button>';
+    else h='<div class="ph" role="img" aria-label="'+(m.t==='vid'?'Video':'Photo')+' preview placeholder">'+mock(m.p)+(m.t==='vid'?'<span class="soon">Video coming soon</span>':'')+'</div>';
+    slide.innerHTML=h;
+    if(m.t==='vid'&&id){
+      po=slide.querySelector('.vposter');
+      po.onload=function(){if(po.naturalWidth<=120){po.onload=null;po.src=ytThumb(id)}};
+      po.onerror=function(){po.onerror=function(){po.remove()};po.src=ytThumb(id)};
+      slide.querySelector('.vfacade').onclick=function(){slide.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="'+CFG.titles[m.p]+' video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>'};
+    }else if(m.t==='img')photo(slide.firstChild,pic(m.p,m.n),CFG.titles[m.p]+' preview '+m.n);
+    slide.classList.remove('flip');void slide.offsetWidth;slide.classList.add('flip');
     [].forEach.call(thumbs.children,function(t,j){t.setAttribute('aria-current',j===cur)});
+    var c=thumbs.children[cur];if(c&&c.scrollIntoView)c.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
   }
   function upd(){
     var s=sorted(),v=s.length?variantOf(s):0;
@@ -567,7 +644,8 @@ p{text-wrap:pretty}
   pv.addEventListener('keydown',function(e){if(e.target.closest('input,video'))return;if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
   pv.addEventListener('close',function(){if(/^#template-/.test(location.hash)){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){location.hash='#templates'}}});
   pv.addEventListener('click',function(e){if(e.target===pv)pv.close()});
-  function openPV(i,pre){var all=!!pre;prod=i;sel=all?pre.slice():[i];document.getElementById('mt').textContent=all?'The Complete GentaDeck Bundle':CFG.titles[i];document.getElementById('md').textContent=all?'All four decks: Finance, Digital Marketing, Business Plan, and Product Management.':CFG.desc[i];document.getElementById('sSlides').textContent=all?sumS+' in total':CFG.slides[i]+' slides';document.getElementById('sCharts').textContent=all?sumC+' in total':CFG.charts[i]+' charts';upd();show(0);if(!pv.open)pv.showModal();pv.scrollTop=0}
+  pv.addEventListener('close',function(){slide.innerHTML=''});
+  function openPV(i,pre){var all=!!pre;prod=i;sel=all?pre.slice():[i];document.getElementById('mt').textContent=all?'The Complete GentaDeck Bundle':CFG.titles[i];document.getElementById('md').textContent=all?'All four decks: Finance, Digital Marketing, Business Plan, and Product Management.':CFG.desc[i];document.getElementById('sSlides').textContent=all?sumS+' in total':CFG.slides[i]+' slides';document.getElementById('sCharts').textContent=all?sumC+' in total':CFG.charts[i]+' charts';upd();list=mediaFor(i,all);buildThumbs();show(0);if(!pv.open)pv.showModal();pv.setAttribute('tabindex','-1');pv.focus({preventScroll:true});pv.scrollTop=0}
   rail.addEventListener('click',function(e){
     var o=e.target.closest('[data-open]'),b=e.target.closest('[data-buy]');
     if(o)location.hash='#template-'+'abcd'.charAt(+o.dataset.open);
@@ -581,6 +659,20 @@ p{text-wrap:pretty}
     if(!CFG.email){say('Email address is not set yet.');return}
     window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(CFG.email)+'&su='+encodeURIComponent('GentaDeck question'),'_blank','noopener');
   };
+
+  /* theme (system / light / dark) + mobile menu */
+  var root=document.documentElement,tb=document.getElementById('themeBtn'),MODES=['system','light','dark'],mode='system';
+  try{mode=localStorage.getItem('gd-theme')||'system'}catch(e){}
+  if(MODES.indexOf(mode)<0)mode='system';
+  function applyTheme(){if(mode==='system')root.removeAttribute('data-theme');else root.setAttribute('data-theme',mode);tb.setAttribute('aria-label','Theme: '+mode+'. Activate to change.')}
+  tb.onclick=function(){mode=MODES[(MODES.indexOf(mode)+1)%MODES.length];try{localStorage.setItem('gd-theme',mode)}catch(e){}applyTheme();say('Theme: '+mode)};
+  applyTheme();
+  var mb=document.getElementById('menuBtn'),nv=document.getElementById('nav');
+  function setMenu(o){nv.classList.toggle('open',o);mb.setAttribute('aria-expanded',o)}
+  mb.onclick=function(){setMenu(!nv.classList.contains('open'))};
+  nv.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  document.addEventListener('click',function(e){if(!e.target.closest('header'))setMenu(false)});
 
   /* questions panel + payment label */
   var qb=document.getElementById('qbtn'),qt=document.getElementById('qtxt'),fb=document.getElementById('fbehance');
